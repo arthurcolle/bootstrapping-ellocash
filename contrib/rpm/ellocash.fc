@@ -1,0 +1,8 @@
+/usr/bin/ellocash-cli		--	gen_context(system_u:object_r:ellocash_exec_t,s0)
+/usr/sbin/ellocashd		--	gen_context(system_u:object_r:ellocash_exec_t,s0)
+/usr/lib(64)?/ellocash/ellocashd		--	gen_context(system_u:object_r:ellocash_exec_t,s0)
+
+/etc/ellocash(/.*)?		gen_context(system_u:object_r:ellocash_conf_t,s0)
+/var/lib/ellocash(/.*)?		gen_context(system_u:object_r:ellocash_var_lib_t,s0)
+
+(/var)?/run/ellocashd(/.*)?   gen_context(system_u:object_r:ellocash_var_run_t,s0)

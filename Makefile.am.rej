@@ -1,0 +1,53 @@
+***************
+*** 246,252 ****
+    $(ELLOCASH_CORE_H)
+  
+  # crypto primitives library
+- crypto_libellocash_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(ELLOCASH_CONFIG_INCLUDES)
+  crypto_libellocash_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+  crypto_libellocash_crypto_a_SOURCES = \
+    crypto/aes.cpp \
+--- 246,252 ----
+    $(ELLOCASH_CORE_H)
+  
+  # crypto primitives library
++ crypto_libellocash_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(ELLOCASH_CONFIG_INCLUDES) $(SSL_CFLAGS)
+  crypto_libellocash_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+  crypto_libellocash_crypto_a_SOURCES = \
+    crypto/aes.cpp \
+***************
+*** 260,265 ****
+    crypto/hmac_sha512.h \
+    crypto/ripemd160.cpp \
+    crypto/ripemd160.h \
+    crypto/sha1.cpp \
+    crypto/sha1.h \
+    crypto/sha256.cpp \
+--- 260,267 ----
+    crypto/hmac_sha512.h \
+    crypto/ripemd160.cpp \
+    crypto/ripemd160.h \
++   crypto/scrypt.cpp \
++   crypto/scrypt.h \
+    crypto/sha1.cpp \
+    crypto/sha1.h \
+    crypto/sha256.cpp \
+***************
+*** 443,450 ****
+  endif
+  
+  libellocashconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+- libellocashconsensus_la_LIBADD = $(LIBSECP256K1)
+- libellocashconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_ELLOCASH_INTERNAL
+  libellocashconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+  
+  endif
+--- 445,452 ----
+  endif
+  
+  libellocashconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
++ libellocashconsensus_la_LIBADD = $(LIBSECP256K1) $(CRYPTO_LIBS)
++ libellocashconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_ELLOCASH_INTERNAL $(SSL_CFLAGS)
+  libellocashconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+  
+  endif

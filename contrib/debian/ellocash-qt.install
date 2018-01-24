@@ -1,0 +1,6 @@
+usr/local/bin/ellocash-qt usr/bin
+share/pixmaps/ellocash32.xpm usr/share/pixmaps
+share/pixmaps/ellocash16.xpm usr/share/pixmaps
+share/pixmaps/ellocash128.png usr/share/pixmaps
+debian/ellocash-qt.desktop usr/share/applications
+debian/ellocash-qt.protocol usr/share/kde4/services/

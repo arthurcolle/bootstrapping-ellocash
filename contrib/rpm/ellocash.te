@@ -1,0 +1,81 @@
+policy_module(ellocash, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type ellocash_t;
+type ellocash_exec_t;
+init_daemon_domain(ellocash_t, ellocash_exec_t)
+
+permissive ellocash_t;
+
+type ellocash_initrc_exec_t;
+init_script_file(ellocash_initrc_exec_t)
+
+type ellocash_conf_t;
+files_type(ellocash_conf_t)
+
+type ellocash_var_lib_t;
+files_type(ellocash_var_lib_t)
+
+type ellocash_var_run_t;
+files_type(ellocash_var_run_t)
+
+type ellocash_port_t;
+corenet_port(ellocash_port_t)
+
+########################################
+#
+# ellocash local policy
+#
+allow ellocash_t self:process { fork };
+
+allow ellocash_t self:fifo_file rw_fifo_file_perms;
+allow ellocash_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(ellocash_t, ellocash_conf_t, ellocash_conf_t)
+manage_files_pattern(ellocash_t, ellocash_conf_t, ellocash_conf_t)
+
+manage_dirs_pattern(ellocash_t, ellocash_var_lib_t, ellocash_var_lib_t)
+manage_files_pattern(ellocash_t, ellocash_var_lib_t, ellocash_var_lib_t)
+files_var_lib_filetrans(ellocash_t, ellocash_var_lib_t, { dir file })
+
+manage_dirs_pattern(ellocash_t, ellocash_var_run_t, ellocash_var_run_t)
+manage_files_pattern(ellocash_t, ellocash_var_run_t, ellocash_var_run_t)
+
+sysnet_dns_name_resolve(ellocash_t)
+corenet_all_recvfrom_unlabeled(ellocash_t)
+
+allow ellocash_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(ellocash_t)
+corenet_tcp_sendrecv_generic_node(ellocash_t)
+corenet_tcp_sendrecv_all_ports(ellocash_t)
+corenet_tcp_bind_generic_node(ellocash_t)
+
+gen_require(`
+    type ellocash_port_t;
+')
+allow ellocash_t ellocash_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type ellocash_port_t;
+')
+allow ellocash_t ellocash_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(ellocash_t)
+
+files_read_etc_files(ellocash_t)
+
+miscfiles_read_localization(ellocash_t)
+
+sysnet_dns_name_resolve(ellocash_t)
+
+allow ellocash_t ellocash_exec_t:file execute_no_trans;
+allow ellocash_t self:process setsched;
+corecmd_exec_ls(ellocash_t)
+corenet_tcp_connect_http_port(ellocash_t)
+dev_read_urand(ellocash_t)
+fs_getattr_xattr_fs(ellocash_t)
+kernel_read_system_state(ellocash_t)

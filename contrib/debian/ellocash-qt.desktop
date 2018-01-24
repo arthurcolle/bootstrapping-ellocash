@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Ellocash Core
+Comment=Connect to the Ellocash P2P Network
+Comment[de]=Verbinde mit dem Ellocash peer-to-peer Netzwerk
+Comment[fr]=Ellocash, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Ellocash, eşten eşe kriptografik sanal para birimi
+Exec=ellocash-qt %u
+Terminal=false
+Type=Application
+Icon=ellocash128
+MimeType=x-scheme-handler/ellocash;
+Categories=Office;Finance;

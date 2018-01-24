@@ -1,0 +1,33 @@
+# /etc/conf.d/ellocashd: config file for /etc/init.d/ellocashd
+
+# Config file location
+#ELLOCASHD_CONFIGFILE="/etc/ellocash/ellocash.conf"
+
+# What directory to write pidfile to?  (created and owned by $ELLOCASHD_USER)
+#ELLOCASHD_PIDDIR="/var/run/ellocashd"
+
+# What filename to give the pidfile
+#ELLOCASHD_PIDFILE="${ELLOCASHD_PIDDIR}/ellocashd.pid"
+
+# Where to write ellocashd data (be mindful that the blockchain is large)
+#ELLOCASHD_DATADIR="/var/lib/ellocashd"
+
+# User and group to own ellocashd process
+#ELLOCASHD_USER="ellocash"
+#ELLOCASHD_GROUP="ellocash"
+
+# Path to ellocashd executable
+#ELLOCASHD_BIN="/usr/bin/ellocashd"
+
+# Nice value to run ellocashd under
+#ELLOCASHD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#ELLOCASHD_OPTS=""
+
+# The timeout in seconds OpenRC will wait for ellocashd to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+ELLOCASHD_SIGTERM_TIMEOUT=60
